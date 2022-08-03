@@ -1,0 +1,44 @@
+{
+  "studentInfo": [
+    {
+      "id": 1,
+      "name": "ritik",
+      "phone": 12345
+    },
+    {
+      "id": 2,
+      "name": "jai prakash",
+      "phone": 12345
+    },
+    {
+      "id": 3,
+      "name": "shri Hari",
+      "phone": 12345
+    },
+    {
+      "id": 4,
+      "name": "Koyle Brayn",
+      "phone": 12345
+    },
+    {
+      "name": "qwd",
+      "phone": "123456",
+      "id": 5
+    },
+    {
+      "name": "Ritik Chauhan",
+      "phone": "0987654321",
+      "id": 6
+    },
+    {
+      "name": "jai ram thakur",
+      "phone": "12345",
+      "id": 7
+    },
+    {
+      "name": "Ritik Chauhan",
+      "phone": "7654321",
+      "id": 8
+    }
+  ]
+}
