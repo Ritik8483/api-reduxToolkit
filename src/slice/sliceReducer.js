@@ -4,8 +4,8 @@ import { apiRoot } from "../global/global";
 
 export const getStudentData = createAsyncThunk(
   "studentReducer/getStudentData",
-  async () => {
-    return fetch(apiRoot).then((resp) => resp.json());
+  async (enteries) => {
+    return fetch(`${apiRoot}?_start=${enteries.initialEntry}&_end=${enteries.totalEnteries}`).then((resp) => resp.json());
     // return axios.get(apiRoot).then((resp)=>resp.json());
   }
 );
@@ -33,12 +33,13 @@ export const getStudentInfo = createAsyncThunk(
   );
 export const editStudentInfo = createAsyncThunk(
   "studentReducer/editStudentInfo",
-  async (values,id) => {
-    return fetch(`${apiRoot}/${id}`, {
+  async (valuesObject) => {
+    console.log('VV',valuesObject);
+    return fetch(`${apiRoot}/${valuesObject.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    }).then((resp) => resp.json()).then((resp) => console.log('543',resp));
+      body: JSON.stringify(valuesObject.inputValues),
+    })
   }
 );
 const initialState = {
@@ -87,7 +88,7 @@ const studentSlice = createSlice({
     },
     [editStudentInfo.fulfilled]: (state, action) => {
     state.loading = false;
-    state.studentArray=[action.payload];
+    state.studentArray=[...action.payload];
     },
   },
 });

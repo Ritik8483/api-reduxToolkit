@@ -2,23 +2,18 @@
   "studentInfo": [
     {
       "id": 1,
-      "name": "ritik",
-      "phone": 12345
-    },
-    {
-      "id": 2,
-      "name": "jai prakash",
-      "phone": 12345
+      "name": " zxcv",
+      "phone": "09090"
     },
     {
       "id": 3,
-      "name": "shri Hari",
-      "phone": 12345
+      "name": "mnbvcxz",
+      "phone": "0987612345"
     },
     {
       "id": 4,
-      "name": "Koyle Brayn",
-      "phone": 12345
+      "name": "Koyle zxcv",
+      "phone": "87654"
     },
     {
       "name": "qwd",
@@ -39,6 +34,51 @@
       "name": "Ritik Chauhan",
       "phone": "7654321",
       "id": 8
+    },
+    {
+      "name": "asdf 123",
+      "phone": "1109876",
+      "id": 9
+    },
+    {
+      "id": 10,
+      "name": " zxcv",
+      "phone": "09090"
+    },
+    {
+      "id":11,
+      "name": "mnbvcxz",
+      "phone": "0987612345"
+    },
+    {
+      "id": 12,
+      "name": "Koyle zxcv",
+      "phone": "87654"
+    },
+    {
+      "name": "qwd",
+      "phone": "123456",
+      "id": 13
+    },
+    {
+      "name": "Ritik Chauhan",
+      "phone": "0987654321",
+      "id": 14
+    },
+    {
+      "name": "jai ram thakur",
+      "phone": "12345",
+      "id": 15
+    },
+    {
+      "name": "Ritik Chauhan",
+      "phone": "7654321",
+      "id": 16
+    },
+    {
+      "name": "asdf 123",
+      "phone": "1109876",
+      "id": 17
     }
   ]
 }

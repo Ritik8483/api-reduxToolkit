@@ -45,8 +45,10 @@ const AddStudent = () => {
     const navigate=useNavigate();
     const submitForm=(e)=>{
         e.preventDefault();
+        
         if(params.id){
-            dispatch(editStudentInfo(inputValues,params.id));
+            console.log('submitting p',params)
+            dispatch(editStudentInfo({ inputValues: inputValues,id:params.id}));
             dispatch(getStudentData());
         }
         else{

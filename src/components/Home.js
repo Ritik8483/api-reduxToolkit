@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,13 +10,20 @@ import { deleteStudentData, getStudentData } from '../slice/sliceReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import { useNavigate,useParams } from "react-router-dom";
+import AddModal from './AddModal';
+import Pagination from 'react-responsive-pagination';
 
 const Home = () => {
+  const [isOpen,setIsOpen]=useState(false);
     const params=useParams();
     const dispatch=useDispatch();
     const navigate=useNavigate();
+
+    const totalPages = 4;
+    const pageSize=7;
+    
     useEffect(() => {
-        dispatch(getStudentData())
+        dispatch(getStudentData({initialEntry:0,totalEnteries:pageSize}))
     }, []);
     const handleDelete=(id)=>{
         dispatch(deleteStudentData(id));
@@ -25,10 +32,24 @@ const Home = () => {
     const handleEdit=(id)=>{
         navigate(`editStudent/${id}`);
     }    
+
+  const [currentPage, setCurrentPage] = useState(1);
+  function handlePageChange(page) {
+    setCurrentPage(page);
+    console.log('page',page);
+    if(page===1){
+      dispatch(getStudentData({initialEntry:0,totalEnteries:pageSize}))
+    }
+    else{
+      dispatch(getStudentData({initialEntry:pageSize*page-pageSize,totalEnteries:pageSize*page}))
+    }
+  }
   return (
     <div>
 
 <Button onClick={()=>navigate('/addStudent')} variant="contained">Add Student</Button>
+<Button onClick={()=>setIsOpen(true)} variant="contained">Modal</Button>
+
         <TableContainer style={{marginTop:'40px'}} component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -47,7 +68,7 @@ const Home = () => {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {index+1}
+                { currentPage === 1? index+1 : currentPage * pageSize - pageSize + 1 + index}
               </TableCell>
               <TableCell align="right">{datas.name}</TableCell>
               <TableCell align="right">{datas.phone}</TableCell>
@@ -58,6 +79,20 @@ const Home = () => {
         </TableBody>
       </Table>
     </TableContainer>
+    {/* <div className='m-5 d-flex justify-content-end'> */}
+      <Pagination
+        extraClassName='justify-content-end m-5'
+        total={totalPages}
+        current={currentPage}
+        onPageChange={page => handlePageChange(page)}
+        maxWidth='100px'
+      />
+    {/* </div> */}
+
+    {
+      isOpen && 
+      <AddModal isOpen={isOpen} onHide={()=>setIsOpen(false)} />
+    }
     </div>
   )
 }
