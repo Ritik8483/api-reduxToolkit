@@ -9,6 +9,22 @@ export const getStudentData = createAsyncThunk(
     // return axios.get(apiRoot).then((resp)=>resp.json());
   }
 );
+
+export const getSortedData = createAsyncThunk(
+  "studentReducer/getSortedData",
+  async () => {
+    return fetch(`${apiRoot}?_sort=${'id'}&_order=desc`).then((resp) => resp.json());
+  }
+);
+
+export const getSearchedData = createAsyncThunk(
+  "studentReducer/getSearchedData",
+  async (searchValue) => {
+    console.log('log',searchValue);
+    return fetch(`${apiRoot}/?name=${searchValue}`).then((resp) => resp.json());
+  }
+);
+
 export const addStudentInfo = createAsyncThunk(
   "studentReducer/addStudentInfo",
   async (values) => {
@@ -44,6 +60,8 @@ export const editStudentInfo = createAsyncThunk(
 );
 const initialState = {
   studentArray: [],
+  sortedArray:[],
+  // searchedData:{},
   editStudent:{},
   loading: false,
 };
@@ -57,6 +75,20 @@ const studentSlice = createSlice({
       state.loading = true;
     },
     [getStudentData.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.studentArray = action.payload;
+    },
+    [getSortedData.pending]: (state) => {
+      state.loading = true;
+    },
+    [getSortedData.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.sortedArray = action.payload;
+    },
+    [getSearchedData.pending]: (state) => {
+      state.loading = true;
+    },
+    [getSearchedData.fulfilled]: (state, action) => {
       state.loading = false;
       state.studentArray = action.payload;
     },
